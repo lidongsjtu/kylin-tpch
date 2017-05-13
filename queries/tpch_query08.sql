@@ -4,8 +4,8 @@
 with all_nations as (
     select
 		o_orderyear as o_year,
-		l_saleprice as volume,
-		n2.n_name as nation
+		n2.n_name as nation,
+		sum(l_saleprice) as volume
 	from
 	    v_lineitem
 	    inner join part on l_partkey = p_partkey
@@ -19,8 +19,8 @@ with all_nations as (
 		r_name = 'AMERICA'
 		and o_orderdate between '1995-01-01' and '1996-12-31'
 		and p_type = 'ECONOMY BURNISHED NICKEL'
-	group by o_orderyear,
-		l_saleprice,
+    group by 
+    	o_orderyear,
 		n2.n_name
 ),
 peru as (

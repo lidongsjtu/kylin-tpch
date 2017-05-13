@@ -8,13 +8,6 @@ with avg_tmp as (
         customer
     where
         c_acctbal > 0.00 and substring(c_phone, 1, 2) in ('13','31','23','29','30','18','17')
-),
-cus_tmp as (
-    select c_custkey as noordercus
-    from
-        customer left join v_orders on c_custkey = o_custkey
-    where o_orderkey is null
-    group by c_custkey
 )
 
 select
@@ -26,10 +19,11 @@ from (
         substring(c_phone, 1, 2) as cntrycode,
         c_acctbal
     from 
-        customer inner join cus_tmp on c_custkey = noordercus, avg_tmp
+        customer left join v_orders on c_custkey = o_custkey, avg_tmp
     where 
         substring(c_phone, 1, 2) in ('13','31','23','29','30','18','17')
         and c_acctbal > avg_acctbal
+        and o_orderkey is null
 ) t
 group by
     cntrycode

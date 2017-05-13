@@ -16,6 +16,9 @@ with in_scope_data as(
 		and l_shipdelayed = 0
 		and l_receiptdate >= '1995-01-01'
 		and l_receiptdate < '1996-01-01'
+	group by 
+		l_shipmode,
+		o_orderpriority
 ), all_l_shipmode as(
 	select
 		distinct l_shipmode

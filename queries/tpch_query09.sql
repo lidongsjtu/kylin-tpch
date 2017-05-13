@@ -20,6 +20,7 @@ from
 			inner join nation on s_nationkey = n_nationkey
 		where
 			p_name like '%plum%'
+			
 	) as profit
 group by
 	nation,

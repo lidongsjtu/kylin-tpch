@@ -35,6 +35,15 @@ where
 	p_size = 37
 	and p_type like '%COPPER'
 	and r_name = 'EUROPE'	
+group by
+    s_acctbal,
+	s_name,
+	n_name,
+	p_partkey,
+	p_mfgr,
+	s_address,
+	s_phone,
+	s_comment
 order by
 	s_acctbal desc,
 	n_name,
